@@ -1,7 +1,7 @@
 <script>
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
-	import Modal from '../lib/components/modal.svelte';
+	import Register from '../routes/Register.svelte';
 </script>
 
 <svelte:head>
@@ -21,7 +21,7 @@
 		to your new<br />SvelteKit app
 	</h1>
 
-	<Modal/>
+	<Register/>
 
 </section>
 

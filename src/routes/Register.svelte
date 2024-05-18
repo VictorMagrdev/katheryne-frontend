@@ -1,5 +1,6 @@
 <script>
     import { writable } from 'svelte/store';
+	import { redirect } from '@sveltejs/kit';
 
     export const modalOpen = writable(false);
 
@@ -15,11 +16,11 @@
 <button on:click={openModal}>Abrir Modal</button>
 
 {#if $modalOpen}
-    <div class="modal" on:click={closeModal}>
-        <div class="modal-content" on:click|stopPropagation>
+    <div class="modal">
+        <div class="modal-content">
             <button class="close-btn" on:click={closeModal}>&times;</button>
             <h2>Register</h2>
-            <form method="POST" action="/page">
+            <form method="POST" action={closeModal}>
                 <label for="username">Username</label>
                 <input type="text" id="username" required>
                 <label for="nombre">Nombre</label>
@@ -54,16 +55,19 @@
 
     .modal-content {
         background-color: #fefefe;
-        padding: 10px;
+        padding: 20px;
         border: 1px solid #888;
         width: 80%;
-        max-width: 300px;
+        max-width: 400px;
         position: relative;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
     .modal-content h2 {
         margin-top: 0;
-        font-size: 1.2em;
+        font-size: 1.5em;
+        margin-bottom: 15px;
     }
 
     .modal-content form {
@@ -72,27 +76,28 @@
     }
 
     .modal-content label {
-        margin-top: 5px;
-        font-size: 0.9em;
+        margin-top: 10px;
+        font-size: 1em;
     }
 
     .modal-content input {
-        margin-bottom: 5px;
-        padding: 5px;
+        margin-bottom: 10px;
+        padding: 10px;
         border: 1px solid #ccc;
         border-radius: 4px;
-        width: calc(100% - 12px);
+        width: calc(100% - 22px);
+        font-size: 1em;
     }
 
     .modal-content button[type="submit"] {
-        margin-top: 10px;
-        padding: 8px;
+        margin-top: 15px;
+        padding: 10px;
         background-color: #4CAF50;
         color: white;
         border: none;
         border-radius: 4px;
         cursor: pointer;
-        font-size: 0.9em;
+        font-size: 1em;
     }
 
     .modal-content button[type="submit"]:hover {
@@ -101,11 +106,11 @@
 
     .close-btn {
         position: absolute;
-        top: 5px;
-        right: 5px;
+        top: 10px;
+        right: 10px;
         background-color: transparent;
         border: none;
-        font-size: 1.2em;
+        font-size: 1.5em;
         cursor: pointer;
     }
 </style>
